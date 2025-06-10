@@ -23,6 +23,25 @@ export default function RootLayout({
   return (
     <html className={inter.className}>
       <body>
+        <p
+          style={{
+            fontSize: "1rem",
+            color: "white",
+            fontWeight: "bold",
+            backgroundColor: "rgb(150, 0, 0)",
+            border: "1px solid rgb(175, 0, 0)",
+            letterSpacing: "0",
+            textTransform: "uppercase",
+            padding: "0.25rem 0.5rem",
+            borderRadius: "0.5rem",
+            marginTop: "0.25rem",
+            width: "100%",
+            marginBottom: "1rem",
+            textAlign: "center",
+          }}
+        >
+          SOFTWARE IN BETA, EXPECT ERRORS
+        </p>
         <div className={layout.header}>
           <a href="/" style={{ textDecoration: "none", color: "black" }}>
             <h1>
@@ -31,22 +50,6 @@ export default function RootLayout({
             </h1>
             <p>
               <i>— a NewHayo Prom</i>
-            </p>
-            <p
-              style={{
-                fontSize: "1rem",
-                color: "white",
-                fontWeight: "bold",
-                backgroundColor: "rgb(125, 0, 0)",
-                letterSpacing: "0",
-                textTransform: "uppercase",
-                padding: "0.25rem 0.5rem",
-                borderRadius: "0.5rem",
-                marginTop: "0.25rem",
-                width: "fit-content",
-              }}
-            >
-              SOFTWARE IN BETA, EXPECT ERRORS
             </p>
           </a>
         </div>

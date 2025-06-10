@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from "react";
 export default function QRCode({ text }: { text: string }) {
   const { SVG } = useQRCode();
   const [conceal, setConceal] = useState<boolean>(true);
-  const [time, setTime] = useState<number>(60);
+  const [time, setTime] = useState<number>(15);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -28,7 +28,7 @@ export default function QRCode({ text }: { text: string }) {
             setConceal(true);
             if (timeoutRef.current) clearTimeout(timeoutRef.current);
             if (intervalRef.current) clearInterval(intervalRef.current);
-            setTime(60);
+            setTime(15);
             return;
           }
 
@@ -42,8 +42,8 @@ export default function QRCode({ text }: { text: string }) {
           timeoutRef.current = setTimeout(() => {
             setConceal(true);
             if (intervalRef.current) clearInterval(intervalRef.current);
-            setTime(60);
-          }, 60000);
+            setTime(15);
+          }, 15000);
 
           setConceal(false);
         }}
