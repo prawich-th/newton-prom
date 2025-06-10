@@ -1,4 +1,4 @@
-import { getAllAttendees } from "@/actions/registerationActions";
+import { getAllAttendees } from "@/actions/registrationActions";
 import UserTile from "./userTile";
 import styles from "./allitems.module.scss";
 

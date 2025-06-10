@@ -7,7 +7,7 @@ export const interpretTrack = (track: string) => {
     case "Science":
       return "Science & Engineering";
     case "Business":
-      return "Newton Business School (NBS) / Business";
+      return "Newton Business School (NBS)";
     case "Arts":
       return "Art & Design";
     case "Other":

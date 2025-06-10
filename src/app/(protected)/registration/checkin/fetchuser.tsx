@@ -6,7 +6,7 @@ import {
   enableUser,
   fetchUser,
   removeCheckin,
-} from "@/actions/registerationActions";
+} from "@/actions/registrationActions";
 import { isEligibleForRoyalty } from "@/lib/royaltyhelper";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
