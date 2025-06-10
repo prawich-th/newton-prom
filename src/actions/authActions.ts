@@ -63,7 +63,10 @@ export const createUser = async (values: z.infer<typeof createSchema>) => {
     },
   });
 
-  return user;
+  return {
+    user,
+    success: `Successfully Created User: ${user.name} Ticket ID: ${user.id}`,
+  };
 };
 
 export const LoginUser = async (values: z.infer<typeof loginSchema>) => {

@@ -31,7 +31,22 @@ export default function RootLayout({
             </h1>
             <p>
               <i>— a NewHayo Prom</i>
-              IN TESTING PHRASE.
+            </p>
+            <p
+              style={{
+                fontSize: "1rem",
+                color: "white",
+                fontWeight: "bold",
+                backgroundColor: "rgb(125, 0, 0)",
+                letterSpacing: "0",
+                textTransform: "uppercase",
+                padding: "0.25rem 0.5rem",
+                borderRadius: "0.5rem",
+                marginTop: "0.25rem",
+                width: "fit-content",
+              }}
+            >
+              SOFTWARE IN BETA, EXPECT ERRORS
             </p>
           </a>
         </div>
