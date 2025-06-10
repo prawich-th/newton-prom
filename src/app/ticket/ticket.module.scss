@@ -1,0 +1,54 @@
+.container {
+  min-height: 100svh;
+  // padding: ;
+}
+
+.name {
+  margin-bottom: 0.2rem;
+  #usersname {
+    font-size: 2rem;
+  }
+}
+
+.main {
+  p {
+    font-size: 1.2rem;
+  }
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  margin: 1rem 0;
+  img {
+    margin: 1rem 0;
+  }
+  h3 {
+    font-size: 1.75rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+  }
+  p {
+    text-align: center;
+    color: lightgrey;
+  }
+}
+
+.qrcode {
+  margin: 0.5rem 0;
+  margin-top: 1rem;
+
+  p {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.ticketInfo {
+  margin-top: 1rem;
+  h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+}

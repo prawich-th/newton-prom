@@ -1,0 +1,22 @@
+.header {
+  h1 {
+    letter-spacing: -0.15rem;
+    color: var(--foreground);
+    line-height: 0.8;
+    font-size: 2.5rem;
+  }
+  p {
+    padding-top: 0.5rem;
+    letter-spacing: -0.1rem;
+    color: var(--foreground);
+  }
+  margin-bottom: 1rem;
+}
+
+.footer {
+  margin-top: 2rem;
+}
+
+.mainn {
+  min-height: 83vh;
+}
