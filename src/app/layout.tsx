@@ -8,7 +8,11 @@ export const metadata: Metadata = {
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
-const inter = Inter();
+const inter = Inter({
+  subsets: ["latin"],
+  style: ["italic", "normal"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export default function RootLayout({
   children,
