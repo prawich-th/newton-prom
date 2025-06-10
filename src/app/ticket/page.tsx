@@ -57,6 +57,34 @@ export default async function Ticket() {
                 )}`
               : "Not checked in"
           }
+          type={user.t_checkedIn ? "success" : "normal"}
+          fullWidth
+        />
+
+        {isEligibleForRoyalty(user) ? (
+          !user.t_disabled ? (
+            <InfoField
+              value={`You are eligible to be voted for as prom royalty. To withdraw your
+          name from consideration, please contact the Registration Team.`}
+              type="normal"
+              fullWidth
+            />
+          ) : (
+            <InfoField
+              value="You have VOLUNTARILY withdrawn yourself from prom royalty voting. If you believe that this is a mistake, please contact the Registration Team."
+              type="error"
+              fullWidth
+            />
+          )
+        ) : (
+          <InfoField
+            value={`You are not eligible to be voted for as prom royalty.`}
+            type="normal"
+            fullWidth
+          />
+        )}
+        <InfoField
+          value={`Purchased By: ${user.t_purchasedBy}`}
           type="normal"
           fullWidth
         />
@@ -65,26 +93,6 @@ export default async function Ticket() {
           type="normal"
           fullWidth
         />
-
-        <InfoField
-          value={`Purchased By: ${user.t_purchasedBy}`}
-          type="normal"
-          fullWidth
-        />
-        {isEligibleForRoyalty(user) ? (
-          <InfoField
-            value={`You are eligible to be voted for as prom royalty. To withdraw your
-          name from consideration, please contact the Registration Team.`}
-            type="normal"
-            fullWidth
-          />
-        ) : (
-          <InfoField
-            value={`You are not eligible to be voted for as prom royalty.`}
-            type="normal"
-            fullWidth
-          />
-        )}
 
         <p>DO NOT GIVE YOUR TICKET ID TO ANYONE</p>
       </div>

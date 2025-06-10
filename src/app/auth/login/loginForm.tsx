@@ -6,6 +6,9 @@ import { z } from "zod";
 import styles from "./loginform.module.scss";
 import { LoginUser, logOut } from "../../../actions/authActions";
 import { useTransition } from "react";
+import { redirect } from "next/navigation";
+import StylisedBtn from "@/components/stylisedBtn";
+import toast from "react-hot-toast";
 
 export default function LoginForm() {
   const [isPending, startTransition] = useTransition();
@@ -23,6 +26,10 @@ export default function LoginForm() {
     startTransition(() => {
       LoginUser(data.data).then((res) => {
         console.log(res);
+        if (res?.error) {
+          toast.error(res.error);
+        }
+        // if (!res?.error) return redirect("/");
       });
     });
   };
@@ -32,15 +39,26 @@ export default function LoginForm() {
       <form onSubmit={form.handleSubmit(submitHandler)} className={styles.form}>
         <div>
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" {...form.register("email")} />
+          <input
+            type="email"
+            id="email"
+            {...form.register("email")}
+            disabled={isPending}
+          />
         </div>
         <div>
           <label htmlFor="ticketId">Ticket ID</label>
-          <input type="text" id="ticketId" {...form.register("ticketId")} />
+          <input
+            type="text"
+            id="ticketId"
+            {...form.register("ticketId")}
+            disabled={isPending}
+          />
         </div>
-        <button type="submit">Login</button>
+        <StylisedBtn type="submit" disabled={isPending}>
+          {isPending ? "Loading..." : "Login"}
+        </StylisedBtn>
       </form>
-      <button onClick={() => logOut()}>Sign Out</button>
     </>
   );
 }

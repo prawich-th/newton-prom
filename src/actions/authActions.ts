@@ -4,6 +4,9 @@ import { signIn, signOut } from "@/auth";
 import { idgen } from "@/lib/idgen";
 import prisma from "@/lib/prisma";
 import { createSchema, loginSchema } from "@/schema/authSchema";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import * as z from "zod";
 
 export const createUser = async (values: z.infer<typeof createSchema>) => {
@@ -64,24 +67,36 @@ export const createUser = async (values: z.infer<typeof createSchema>) => {
 };
 
 export const LoginUser = async (values: z.infer<typeof loginSchema>) => {
-  const data = loginSchema.safeParse(values);
+  try {
+    const data = loginSchema.safeParse(values);
 
-  console.log("on server: ", data.data);
+    console.log("on server: ", data.data);
 
-  const result = await signIn("credentials", {
-    email: data.data?.email,
-    ticketId: data.data?.ticketId,
-  });
+    await signIn("credentials", {
+      email: data.data?.email,
+      ticketId: data.data?.ticketId,
+      redirectTo: "/",
+    });
 
-  console.log("result", result);
+    return redirect("/");
+  } catch (error) {
+    if (isRedirectError(error)) {
+      console.log("redirect error");
+      redirect("/");
+    }
 
-  if (!data.success) {
     return {
-      error: data.error.message,
+      error: `Invalid Email or Password`,
     };
+  } finally {
+    console.log("done");
   }
 };
 
 export const logOut = async () => {
+  const store = await cookies();
+
+  store.delete("ticket_type");
+
   await signOut();
 };

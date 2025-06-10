@@ -1,9 +1,12 @@
+import { cookies } from "next/headers";
 import styles from "./page.module.scss";
 import { auth } from "@/auth";
 
 export default async function Home() {
   const session = await auth();
-  // console.log(session);
+  const store = await cookies();
+
+  const type = store.get("ticket_type")?.value || null;
 
   return (
     <div className={styles.page}>
@@ -31,9 +34,11 @@ export default async function Home() {
               Login
             </a>
           )}
-          <a className={styles.secondary} href="/registration">
-            Staff
-          </a>
+          {type && type === "Staff" && (
+            <a className={styles.secondary} href="/registration">
+              Staff
+            </a>
+          )}
         </div>
       </main>
     </div>

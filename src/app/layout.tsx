@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import LogoutBasic from "@/components/Logout";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,11 +31,12 @@ export default function RootLayout({
             </h1>
             <p>
               <i>— a NewHayo Prom</i>
+              IN TESTING PHRASE.
             </p>
           </a>
         </div>
 
-        <Toaster position="top-center" />
+        <Toaster position="bottom-left" />
         <div className={layout.mainn}>
           <main>{children}</main>
         </div>
@@ -48,6 +50,7 @@ export default function RootLayout({
             Software Developed by
             <em> Prawich Thawansakdivudhi</em>
           </p>
+          <LogoutBasic>Logout</LogoutBasic>
         </footer>
       </body>
     </html>

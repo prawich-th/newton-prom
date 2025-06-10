@@ -5,6 +5,7 @@ import authConfig from "./auth.config";
 import { loginSchema } from "./schema/authSchema";
 import { getUserByEmail } from "./data/user";
 import Credentials from "next-auth/providers/credentials";
+import { cookies } from "next/headers";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -51,6 +52,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         if (user.id !== validated.data.ticketId) {
           return null;
         }
+
+        const cookieStore = await cookies();
+        cookieStore.set("ticket_type", user.t_type);
 
         return user;
       },

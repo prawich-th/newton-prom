@@ -4,7 +4,7 @@ import { createSchema } from "@/schema/authSchema";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import styles from "./createform.module.scss";
-import { createUser } from "../../../actions/authActions";
+import { createUser } from "../../../../actions/authActions";
 import { useTransition } from "react";
 
 export default function CreateUserForm() {

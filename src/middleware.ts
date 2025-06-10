@@ -14,7 +14,7 @@ export default auth(async (req) => {
   if (isProtected) return NextResponse.next();
 
   console.log("isAuthenticated: ", !!req.auth);
-  console.log(path);
+
   return NextResponse.next();
 });
 
