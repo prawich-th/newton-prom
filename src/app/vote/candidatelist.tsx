@@ -43,7 +43,7 @@ export default function CandidateList({
     <>
       <input
         type="text"
-        placeholder="Search"
+        placeholder="Search (Nickname, Full Name, Year, Track, Room)"
         value={filterName}
         onChange={(e) => setFilterName(e.target.value)}
         style={{
