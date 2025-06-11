@@ -1,0 +1,38 @@
+.container {
+  min-height: 100svh;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  .info {
+    width: 30rem;
+  }
+}
+
+.main {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  margin: 2rem 0;
+  img {
+    margin: 1rem 0;
+  }
+  h3 {
+    font-size: 1.75rem;
+  }
+  p {
+    text-align: center;
+    color: lightgrey;
+  }
+}
+
+.allforms {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 80%;
+  margin-top: 1rem;
+  align-items: flex-start;
+}

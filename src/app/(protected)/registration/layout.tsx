@@ -9,9 +9,7 @@ export default async function ProtectedLayout({
 }) {
   const session = await auth();
   if (!session?.user?.email) redirect("/login");
-  console.log("issess");
   const user = await getUserByEmail(session?.user?.email);
-  console.log(user);
   if (user && user.t_type !== "Staff") redirect("/");
   return <>{children}</>;
 }

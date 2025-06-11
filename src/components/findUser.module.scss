@@ -1,0 +1,40 @@
+.form {
+  .info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    input {
+      width: 20rem;
+      font-family: "Inter", sans-serif;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+  }
+  // button {
+  //   background-color: #ffffff;
+  //   color: #000000;
+  //   padding: 0.5rem 1rem;
+  //   border-radius: 0.5rem;
+  //   border: none;
+  //   font-size: 1.1rem;
+  //   cursor: pointer;
+  // }
+}

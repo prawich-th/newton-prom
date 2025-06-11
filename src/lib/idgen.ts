@@ -1,3 +1,7 @@
+"use server";
+
+import prisma from "./prisma";
+
 const CHAR_IN_ID = [
   "A",
   "B",
@@ -37,11 +41,29 @@ const CHAR_IN_ID = [
   "9",
 ];
 
-export const idgen = (length: number = 6) => {
+export const idgen = async (length: number = 6, check: boolean = false) => {
   let id = "";
 
   for (let i = 0; i < length; i++) {
     id += CHAR_IN_ID[Math.floor(Math.random() * 36)];
+  }
+
+  if (check) {
+    const user = await prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (user) {
+      console.log(`Duplicate ID Found, generating new id: ${id}`);
+      let eid = true;
+      while (eid) {
+        id = await idgen();
+        const existingUser = await prisma.user.findUnique({
+          where: { id: id },
+        });
+        if (!existingUser) eid = false;
+      }
+    }
   }
 
   return id;

@@ -12,6 +12,7 @@ import {
   disableUser,
   enableUser,
 } from "@/actions/registrationActions";
+import { redirect } from "next/navigation";
 
 export default function UserTileActions({
   data,
@@ -174,6 +175,15 @@ export default function UserTileActions({
             <i className="bx bx-check-shield"></i>
           </StylisedBtn>
         ))}
+      <StylisedBtn
+        disabled={isPending}
+        onClick={() => {
+          redirect(`/registration/edit?ticketid=${user.id}`);
+        }}
+        style={{ fontSize: "1.35rem" }}
+      >
+        <i className="bx bx-edit"></i>
+      </StylisedBtn>
     </form>
   );
 }

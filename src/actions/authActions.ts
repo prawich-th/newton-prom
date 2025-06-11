@@ -11,7 +11,7 @@ import * as z from "zod";
 
 export const createUser = async (values: z.infer<typeof createSchema>) => {
   const data = createSchema.safeParse(values);
-  let tid = idgen();
+  let tid = await idgen();
 
   if (!data.success) {
     return {
@@ -39,7 +39,7 @@ export const createUser = async (values: z.infer<typeof createSchema>) => {
     console.log(`Duplicate ID Found, generating new id: ${tid}`);
     let eid = true;
     while (eid) {
-      tid = idgen();
+      tid = await idgen();
       const existingUser = await prisma.user.findFirst({ where: { id: tid } });
       if (!existingUser) eid = false;
     }

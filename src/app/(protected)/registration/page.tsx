@@ -3,7 +3,6 @@ import { auth } from "@/auth";
 
 export default async function Home() {
   const session = await auth();
-  console.log(session);
 
   return (
     <div className={styles.page}>
@@ -13,10 +12,13 @@ export default async function Home() {
 
         <div className={styles.ctas}>
           <a className={styles.primary} href="/registration/checkin">
-            Check In Attendees
+            Check In
           </a>
           <a className={styles.secondary} href="/registration/directory">
-            All
+            All Tickets
+          </a>{" "}
+          <a className={styles.secondary} href="/registration/edit">
+            Edit Ticket
           </a>
           <a href="/registration/new-user">New User</a>
         </div>

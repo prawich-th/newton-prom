@@ -17,3 +17,14 @@ export const loginSchema = z.object({
   email: z.string({ message: "Invalid Email" }).email(),
   ticketId: z.string({ message: "Invalid Ticket ID" }).min(1),
 });
+
+export const transferSchema = z.object({
+  id: z.string({ message: "Invalid ID" }).min(1),
+  name: z.string({ message: "Invalid Name" }).min(1),
+  email: z.string({ message: "Invalid Email" }).email(),
+  year: z.string({ message: "Invalid Year" }),
+  track: z.string({ message: "Invalid Track" }).min(1),
+  room: z.string({ message: "Invalid Room" }).min(1),
+  school: z.string({ message: "Invalid School" }).min(1),
+  mode: z.string({ message: "Invalid Mode" }).optional().default("edit"),
+});

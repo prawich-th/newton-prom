@@ -5,11 +5,21 @@ import styles from "./userTile.module.scss";
 import InfoField from "@/components/infoFields";
 import { interpretTrack } from "@/lib/interpretTrack";
 import UserTileActions from "./useTileActions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { isEligibleForRoyalty } from "@/lib/royaltyhelper";
 
-export default function UserTile({ user }: { user: User }) {
+export default function UserTile({
+  user,
+  actions = true,
+}: {
+  user: User;
+  actions?: boolean;
+}) {
   const [data, setData] = useState<User>(user);
+
+  useEffect(() => {
+    setData(user);
+  }, [user]);
 
   const updateData = (data: User) => {
     setData(data);
@@ -47,7 +57,7 @@ export default function UserTile({ user }: { user: User }) {
       )}
       <InfoField value={data.id} fullWidth />
       <InfoField value={data.email} fullWidth />
-      <UserTileActions data={data} updateData={updateData} />
+      {actions && <UserTileActions data={data} updateData={updateData} />}
     </div>
   );
 }
