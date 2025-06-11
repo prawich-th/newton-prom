@@ -26,9 +26,14 @@ export default async function Home() {
 
         <div className={styles.ctas}>
           {session ? (
-            <a className={styles.primary} href="/ticket">
-              My Ticket
-            </a>
+            <>
+              <a className={styles.primary} href="/ticket">
+                My Ticket
+              </a>{" "}
+              <a className={styles.primary} href="/vote">
+                Vote
+              </a>
+            </>
           ) : (
             <a className={styles.primary} href="/auth/login">
               Login

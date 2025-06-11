@@ -24,6 +24,14 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  votedKingForId String?
+  votedKingFor   User?   @relation("voteKing", fields: [votedKingForId], references: [id])
+  votedKingBy    User[]  @relation("voteKing")
+
+  votedQueenForId String?
+  votedQueenFor   User?   @relation("voteQueen", fields: [votedQueenForId], references: [id])
+  votedQueenBy    User[]  @relation("voteQueen")
+
   t_purchasedBy    String
   t_checkedIn      Boolean   @default(false)
   t_checkedInAt    DateTime?

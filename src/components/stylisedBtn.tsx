@@ -4,6 +4,7 @@ import styles from "./stylisedBtn.module.scss";
 export default function StylisedBtn(
   props: {
     children: React.ReactNode;
+    spanstyle?: React.CSSProperties;
   } & DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
@@ -12,7 +13,7 @@ export default function StylisedBtn(
   return (
     <div className={styles.container}>
       <button className={styles.button} {...props}>
-        <span>{props.children}</span>
+        <span style={props.spanstyle}>{props.children}</span>
       </button>
     </div>
   );

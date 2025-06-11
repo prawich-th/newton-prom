@@ -1,0 +1,60 @@
+@keyframes hide {
+  from {
+    opacity: 1;
+    display: flex;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    display: flex;
+  }
+  to {
+    opacity: 1;
+    display: flex;
+  }
+}
+
+.candidate {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+  gap: 0.75rem;
+  padding: 1rem;
+  width: 100%;
+  background-color: #0a1331;
+  border-radius: 1.1rem;
+  border: 0.1rem solid #18244b;
+  box-shadow: 0 0.1rem 0.5rem 0 rgba(88, 88, 88, 0.125);
+  background-image: radial-gradient(at 95% 89%, #050c23 0px, transparent 50%),
+    radial-gradient(at 0% 100%, #0d1530 0px, transparent 50%),
+    radial-gradient(at 0% 0%, #18244c 0px, transparent 50%);
+  .candidateInfo {
+    h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+    }
+  }
+  .candidateActions {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  &.hidden {
+    display: none;
+    animation: hide 0.3s;
+  }
+  &.show {
+    display: flex;
+    animation: show 0.3s;
+  }
+}
