@@ -70,13 +70,13 @@ export default function Candidate({
       <div className={styles.candidateActions}>
         <StylisedBtn
           onClick={() => voteKing()}
-          disabled={!!votedKing || isPending}
+          disabled={!!votedKing || isPending || votedQueen === id}
         >
           Vote King
         </StylisedBtn>
         <StylisedBtn
           onClick={() => voteQueen()}
-          disabled={!!votedQueen || isPending}
+          disabled={!!votedQueen || isPending || votedKing === id}
         >
           Vote Queen
         </StylisedBtn>

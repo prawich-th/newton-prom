@@ -27,7 +27,9 @@ export default function CandidateList({
     if (!filterName) setAllIDs(allTickets.map((ticket) => ticket.id));
     const reg = new RegExp(filterName, "i");
     const filteredIDs = allTickets.filter((ticket) => {
-      return reg.test(ticket.name || "");
+      return reg.test(
+        `${ticket.name} ${ticket.year} ${ticket.track} ${ticket.room}`
+      );
     });
     setAllIDs(filteredIDs.map((ticket) => ticket.id));
   }, [filterName]);
