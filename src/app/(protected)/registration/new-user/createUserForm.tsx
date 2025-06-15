@@ -178,6 +178,7 @@ export default function CreateUserForm() {
           >
             <option value="Normal">Normal</option>
             <option value="Early Bird">Early Bird</option>
+            <option value="Plus One">Plus One</option>
             <option value="Supervisors">Supervisors</option>
             <option value="Staff">Staff</option>
             <option value="Late">Late</option>
