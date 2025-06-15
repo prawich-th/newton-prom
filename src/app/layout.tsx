@@ -8,11 +8,47 @@ export const metadata: Metadata = {
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import LogoutBasic from "@/components/Logout";
+import localFont from "next/font/local";
 
 const inter = Inter({
   subsets: ["latin"],
   style: ["italic", "normal"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+const seasons = localFont({
+  src: [
+    {
+      path: "../the-seasons/Fontspring-DEMO-theseasons-reg.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../the-seasons/Fontspring-DEMO-theseasons-it.otf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../the-seasons/Fontspring-DEMO-theseasons-bd.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../the-seasons/Fontspring-DEMO-theseasons-bdit.otf",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "../the-seasons/Fontspring-DEMO-theseasons-lt.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../the-seasons/Fontspring-DEMO-theseasons-ltit.otf",
+      weight: "300",
+      style: "italic",
+    },
+  ],
 });
 
 export default function RootLayout({
@@ -21,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className={inter.className}>
+    <html className={inter.className + " " + seasons.className}>
       <body>
         <p
           style={{
@@ -43,15 +79,13 @@ export default function RootLayout({
           SOFTWARE IN BETA, EXPECT ERRORS
         </p>
         <div className={layout.header}>
-          <a href="/" style={{ textDecoration: "none", color: "black" }}>
-            <h1>
-              Moonlight <br />
-              <i>Masquerade</i>
-            </h1>
-            <p>
-              <i>— a NewHayo Prom</i>
-            </p>
-          </a>
+          <h1>
+            Moonlight <br />
+            <i>M</i>asquerade
+          </h1>
+          <p>
+            <i>— a NewHayo Prom</i>
+          </p>
         </div>
 
         <Toaster position="bottom-left" />
