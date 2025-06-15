@@ -8,8 +8,11 @@ export default function QrScan({
   return (
     <div>
       <Scanner
+        allowMultiple={false}
+        formats={["qr_code"]}
         onScan={(result) => {
           setCode(result[0].rawValue);
+          console.log(result);
         }}
       />
     </div>

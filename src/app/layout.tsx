@@ -79,13 +79,15 @@ export default function RootLayout({
           SOFTWARE IN BETA, EXPECT ERRORS
         </p>
         <div className={layout.header}>
-          <h1>
-            Moonlight <br />
-            <i>M</i>asquerade
-          </h1>
-          <p>
-            <i>— a NewHayo Prom</i>
-          </p>
+          <a href="/">
+            <h1>
+              Moonlight <br />
+              <i>M</i>asquerade
+            </h1>
+            <p>
+              <i>— a NewHayo Prom</i>
+            </p>
+          </a>
         </div>
 
         <Toaster position="bottom-left" />

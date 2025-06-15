@@ -36,6 +36,7 @@ export const FetchUser = () => {
     if (code) {
       form.setValue("ticketId", code);
       form.handleSubmit(finduser)();
+      setShowScanner(false);
     }
   }, [code]);
 
@@ -157,6 +158,9 @@ export const FetchUser = () => {
       <form className={styles.form} onSubmit={form.handleSubmit(finduser)}>
         <div className={styles.info}>
           {showScanner && <QrScan setCode={setCode} />}
+          <StylisedBtn onClick={() => setShowScanner((c) => !c)}>
+            {showScanner ? "Hide Scanner" : "Show Scanner"}
+          </StylisedBtn>
           <div>
             <input
               type="text"
@@ -173,9 +177,6 @@ export const FetchUser = () => {
           {success && <p style={{ color: "lime" }}>{success}</p>}
         </div>
       </form>
-      <StylisedBtn onClick={() => setShowScanner((c) => !c)}>
-        {showScanner ? "Hide Scanner" : "Show Scanner"}
-      </StylisedBtn>
 
       {user && (
         <div style={{ marginTop: "1rem" }} className={styles.user}>
