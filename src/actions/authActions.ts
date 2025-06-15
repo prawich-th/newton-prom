@@ -2,6 +2,7 @@
 
 import { signIn, signOut } from "@/auth";
 import { idgen } from "@/lib/idgen";
+import { AuthAdmin } from "@/lib/permission";
 import prisma from "@/lib/prisma";
 import { createSchema, loginSchema } from "@/schema/authSchema";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
@@ -10,63 +11,74 @@ import { redirect } from "next/navigation";
 import * as z from "zod";
 
 export const createUser = async (values: z.infer<typeof createSchema>) => {
-  const data = createSchema.safeParse(values);
-  let tid = await idgen();
+  try {
+    const admin = await AuthAdmin();
 
-  if (!data.success) {
-    return {
-      error: data.error.message,
-    };
-  }
-  const { email, name, year, track, room, school, t_dateofpurchase, t_type } =
-    data.data;
+    const data = createSchema.safeParse(values);
+    let tid = await idgen();
 
-  console.log(data.data);
-
-  const existingUser = await prisma.user.findFirst({
-    where: {
-      OR: [{ email: email }, { id: tid }],
-    },
-  });
-
-  if (existingUser && existingUser.id !== tid) {
-    return {
-      error: "User already exists",
-    };
-  }
-
-  if (existingUser && existingUser.id === tid) {
-    console.log(`Duplicate ID Found, generating new id: ${tid}`);
-    let eid = true;
-    while (eid) {
-      tid = await idgen();
-      const existingUser = await prisma.user.findFirst({ where: { id: tid } });
-      if (!existingUser) eid = false;
+    if (!data.success) {
+      return {
+        error: data.error.message,
+      };
     }
+    const { email, name, year, track, room, school, t_dateofpurchase, t_type } =
+      data.data;
+
+    console.log(data.data);
+
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        OR: [{ email: email }, { id: tid }],
+      },
+    });
+
+    if (existingUser && existingUser.id !== tid) {
+      return {
+        error: "User already exists",
+      };
+    }
+
+    if (existingUser && existingUser.id === tid) {
+      console.log(`Duplicate ID Found, generating new id: ${tid}`);
+      let eid = true;
+      while (eid) {
+        tid = await idgen();
+        const existingUser = await prisma.user.findFirst({
+          where: { id: tid },
+        });
+        if (!existingUser) eid = false;
+      }
+    }
+
+    const user = await prisma.user.create({
+      data: {
+        id: tid,
+        email,
+        name,
+        year: parseInt(year),
+        track,
+        room,
+        school,
+        t_dateofpurchase: new Date(t_dateofpurchase),
+        t_type,
+        t_purchasedBy: name,
+        t_disabled: false,
+        t_checkedIn: false,
+        t_checkedInAt: null,
+        last_agent: admin.name,
+      },
+    });
+
+    return {
+      user,
+      success: `Successfully Created User: ${user.name} Ticket ID: ${user.id}`,
+    };
+  } catch (error) {
+    return {
+      error: "Something went wrong: " + error,
+    };
   }
-
-  const user = await prisma.user.create({
-    data: {
-      id: tid,
-      email,
-      name,
-      year: parseInt(year),
-      track,
-      room,
-      school,
-      t_dateofpurchase: new Date(t_dateofpurchase),
-      t_type,
-      t_purchasedBy: name,
-      t_disabled: false,
-      t_checkedIn: false,
-      t_checkedInAt: null,
-    },
-  });
-
-  return {
-    user,
-    success: `Successfully Created User: ${user.name} Ticket ID: ${user.id}`,
-  };
 };
 
 export const LoginUser = async (values: z.infer<typeof loginSchema>) => {

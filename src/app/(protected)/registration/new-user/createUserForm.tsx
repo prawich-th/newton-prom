@@ -137,6 +137,8 @@ export default function CreateUserForm() {
             <option value="B">B</option>
             <option value="C">C</option>
             <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         <div className={styles.question}>

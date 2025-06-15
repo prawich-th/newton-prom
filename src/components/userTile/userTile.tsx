@@ -7,6 +7,7 @@ import { interpretTrack } from "@/lib/interpretTrack";
 import UserTileActions from "./useTileActions";
 import { useEffect, useState } from "react";
 import { isEligibleForRoyalty } from "@/lib/royaltyhelper";
+import Tile from "../tile/tile";
 
 export default function UserTile({
   user,
@@ -26,7 +27,7 @@ export default function UserTile({
   };
 
   return (
-    <div className={styles.container}>
+    <Tile>
       <h3>{data.name}</h3>
       <InfoField value={`Year: ${data.year}`} fullWidth />
       <InfoField value={`Track: ${interpretTrack(data.track)}`} fullWidth />
@@ -58,6 +59,6 @@ export default function UserTile({
       <InfoField value={data.id} fullWidth />
       <InfoField value={data.email} fullWidth />
       {actions && <UserTileActions data={data} updateData={updateData} />}
-    </div>
+    </Tile>
   );
 }

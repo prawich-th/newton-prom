@@ -1,5 +1,4 @@
-import { auth } from "@/auth";
-import { getUserByEmail } from "@/data/user";
+import { AuthAdmin } from "@/lib/permission";
 import { redirect } from "next/navigation";
 
 export default async function ProtectedLayout({
@@ -7,9 +6,6 @@ export default async function ProtectedLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
-  if (!session?.user?.email) redirect("/login");
-  const user = await getUserByEmail(session?.user?.email);
-  if (user && user.t_type !== "Staff") redirect("/");
+  await AuthAdmin(true);
   return <>{children}</>;
 }

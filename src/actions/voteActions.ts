@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth";
 import { getUserByEmail } from "@/data/user";
+import { AuthAdmin } from "@/lib/permission";
 import prisma from "@/lib/prisma";
 
 export const vote = async (votedForId: string, type: "king" | "queen") => {
@@ -97,4 +98,30 @@ export const disconnectVote = async (userId: string) => {
   });
 
   return { success: "Vote disconnected" };
+};
+
+export const getVotes = async () => {
+  const admin = await AuthAdmin();
+  let voteFor = false;
+
+  if (admin.t_type === "Super Admin") voteFor = true;
+
+  const votes = await prisma.user.findMany({
+    include: {
+      votedKingBy: true,
+      votedQueenBy: true,
+      votedKingFor: voteFor,
+      votedQueenFor: voteFor,
+      _count: {
+        select: {
+          votedKingBy: true,
+          votedQueenBy: true,
+        },
+      },
+    },
+  });
+
+  console.log(votes);
+
+  return votes;
 };

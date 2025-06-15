@@ -54,7 +54,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         }
 
         const cookieStore = await cookies();
-        cookieStore.set("ticket_type", user.t_type);
+        cookieStore.set("ticket_type", user.t_type, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          maxAge: 60 * 60 * 24 * 30,
+        });
 
         return user;
       },

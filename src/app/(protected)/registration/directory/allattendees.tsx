@@ -1,5 +1,5 @@
 import { getAllAttendees } from "@/actions/registrationActions";
-import UserTile from "./userTile";
+import UserTile from "@/components/userTile/userTile";
 import styles from "./allitems.module.scss";
 
 export const AllUsers = async () => {

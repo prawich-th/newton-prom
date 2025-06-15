@@ -39,7 +39,7 @@ export default async function Home() {
               Login
             </a>
           )}
-          {type && type === "Staff" && (
+          {type && (type === "Admin" || type === "Super Admin") && (
             <a className={styles.secondary} href="/registration">
               Staff
             </a>

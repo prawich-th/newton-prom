@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import { User } from "@/generated/prisma";
-import UserTile from "../directory/userTile";
 import FindUser from "@/components/findUser";
 import { useSearchParams } from "next/navigation";
 import { getUserbyID } from "@/data/user";
 import { toast } from "react-hot-toast";
 import EditTicketForm from "./ticketEditor";
+import UserTile from "@/components/userTile/userTile";
 
 export default function TransferTicketPage() {
   const [ticket, setTicket] = useState<User | null>(null);
