@@ -8,12 +8,13 @@ import {
   removeCheckin,
 } from "@/actions/registrationActions";
 import { isEligibleForRoyalty } from "@/lib/royaltyhelper";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./checkin.module.scss";
 import InfoField from "@/components/infoFields";
 import StylisedBtn from "@/components/stylisedBtn";
 import toast from "react-hot-toast";
+import QrScan from "./qrscan";
 
 export const FetchUser = () => {
   const form = useForm({
@@ -24,10 +25,19 @@ export const FetchUser = () => {
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
   const [user, setUser] = useState<any>(null);
+  const [showScanner, setShowScanner] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
 
   const [actionError, setActionError] = useState<string>("");
   const [actionSuccess, setActionSuccess] = useState<string>("");
+  const [code, setCode] = useState<string>("");
+
+  useEffect(() => {
+    if (code) {
+      form.setValue("ticketId", code);
+      form.handleSubmit(finduser)();
+    }
+  }, [code]);
 
   const finduser = async (data: any) => {
     setError("");
@@ -146,6 +156,7 @@ export const FetchUser = () => {
     <div>
       <form className={styles.form} onSubmit={form.handleSubmit(finduser)}>
         <div className={styles.info}>
+          {showScanner && <QrScan setCode={setCode} />}
           <div>
             <input
               type="text"
@@ -162,6 +173,9 @@ export const FetchUser = () => {
           {success && <p style={{ color: "lime" }}>{success}</p>}
         </div>
       </form>
+      <StylisedBtn onClick={() => setShowScanner((c) => !c)}>
+        {showScanner ? "Hide Scanner" : "Show Scanner"}
+      </StylisedBtn>
 
       {user && (
         <div style={{ marginTop: "1rem" }} className={styles.user}>
