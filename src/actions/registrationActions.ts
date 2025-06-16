@@ -178,3 +178,15 @@ export const edit = async (
     return { error: "Internal Server Error: " + error };
   }
 };
+
+export const getStats = async () => {
+  try {
+    const admin = await AuthAdmin();
+
+    const users = await prisma.user.findMany();
+
+    return { success: "Stats fetched", users };
+  } catch (error) {
+    return { error: "Internal Server Error: " + error };
+  }
+};

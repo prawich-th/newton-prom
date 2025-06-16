@@ -155,12 +155,12 @@ export const FetchUser = () => {
 
   return (
     <div>
+      {showScanner && <QrScan setCode={setCode} />}
+      <StylisedBtn onClick={() => setShowScanner((c) => !c)}>
+        {showScanner ? "Hide Scanner" : "Show Scanner"}
+      </StylisedBtn>
       <form className={styles.form} onSubmit={form.handleSubmit(finduser)}>
         <div className={styles.info}>
-          {showScanner && <QrScan setCode={setCode} />}
-          <StylisedBtn onClick={() => setShowScanner((c) => !c)}>
-            {showScanner ? "Hide Scanner" : "Show Scanner"}
-          </StylisedBtn>
           <div>
             <input
               type="text"

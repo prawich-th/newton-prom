@@ -19,6 +19,12 @@ export default async function Home() {
           </a>{" "}
           <a className={styles.secondary} href="/registration/edit">
             Edit Ticket
+          </a>{" "}
+          <a className={styles.secondary} href="/registration/stats">
+            Check-in Stats
+          </a>{" "}
+          <a className={styles.secondary} href="/registration/votes">
+            Vote Information
           </a>
           <a href="/registration/new-user">New User</a>
         </div>
