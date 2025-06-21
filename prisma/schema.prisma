@@ -39,4 +39,98 @@ model User {
   t_disabled       Boolean   @default(false)
   t_type           String
   last_agent       String?
+
+  // Mayor's Gambit Game Relations
+  gameParticipations GameParticipant[]
+  killedBy           GameKill[]        @relation("Killer")
+  killedAs           GameKill[]        @relation("Victim")
+  arrestedBy         GameArrest[]      @relation("Arrester")
+  arrestedAs         GameArrest[]      @relation("Arrested")
+  mayorVotes         MayorVote[]       @relation("Voter")
+  mayorVotedFor      MayorVote[]       @relation("VotedFor")
+}
+
+// Mayor's Gambit Game Models
+model Game {
+  id        String     @id @default(nanoid())
+  name      String
+  status    GameStatus @default(WAITING)
+  createdAt DateTime   @default(now())
+  startedAt DateTime?
+  endedAt   DateTime?
+
+  participants GameParticipant[]
+  kills        GameKill[]
+  arrests      GameArrest[]
+  mayorVotes   MayorVote[]
+}
+
+model GameParticipant {
+  id               String    @id @default(nanoid())
+  userId           String
+  gameId           String
+  role             GameRole
+  accepted         Boolean   @default(false)
+  acceptedAt       DateTime?
+  knives           Int       @default(0) // For syndicate members
+  correctArrests   Int       @default(0) // For police
+  incorrectArrests Int       @default(0) // For police
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, gameId])
+}
+
+model GameKill {
+  id        String   @id @default(nanoid())
+  killerId  String
+  victimId  String
+  gameId    String
+  createdAt DateTime @default(now())
+
+  killer User @relation("Killer", fields: [killerId], references: [id], onDelete: Cascade)
+  victim User @relation("Victim", fields: [victimId], references: [id], onDelete: Cascade)
+  game   Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+}
+
+model GameArrest {
+  id         String   @id @default(nanoid())
+  arresterId String
+  arrestedId String
+  gameId     String
+  isCorrect  Boolean // Whether the arrested person was actually syndicate
+  createdAt  DateTime @default(now())
+
+  arrester User @relation("Arrester", fields: [arresterId], references: [id], onDelete: Cascade)
+  arrested User @relation("Arrested", fields: [arrestedId], references: [id], onDelete: Cascade)
+  game     Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+}
+
+model MayorVote {
+  id         String   @id @default(nanoid())
+  voterId    String
+  votedForId String
+  gameId     String
+  createdAt  DateTime @default(now())
+
+  voter    User @relation("Voter", fields: [voterId], references: [id], onDelete: Cascade)
+  votedFor User @relation("VotedFor", fields: [votedForId], references: [id], onDelete: Cascade)
+  game     Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@unique([voterId, gameId])
+}
+
+enum GameStatus {
+  WAITING
+  PLAYING
+  VOTING
+  ENDED
+}
+
+enum GameRole {
+  MAYOR
+  POLICE
+  SYNDICATE
+  CITIZEN
 }

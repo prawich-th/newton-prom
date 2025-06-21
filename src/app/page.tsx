@@ -32,6 +32,9 @@ export default async function Home() {
               </a>{" "}
               <a className={styles.primary} href="/vote">
                 Vote
+              </a>{" "}
+              <a className={styles.primary} href="/game">
+                Mayor's Gambit
               </a>
             </>
           ) : (

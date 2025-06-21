@@ -59,7 +59,7 @@ export default function RootLayout({
   return (
     <html className={inter.className + " " + seasons.className}>
       <body>
-        <p
+        {/* <p
           style={{
             fontSize: "1rem",
             color: "white",
@@ -77,7 +77,7 @@ export default function RootLayout({
           }}
         >
           SOFTWARE IN BETA, EXPECT ERRORS
-        </p>
+        </p> */}
         <div className={layout.header}>
           <a href="/">
             <h1>

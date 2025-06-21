@@ -6,33 +6,37 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "import-csv": "tsx src/scripts/import-csv.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.9.1",
-    "@prisma/client": "^6.9.0",
+    "@prisma/client": "^6.10.1",
     "@prisma/extension-accelerate": "^2.0.1",
     "@yudiel/react-qr-scanner": "^2.3.1",
     "boxicons": "^2.1.4",
+    "csv-parse": "^5.6.0",
     "next": "15.3.3",
-    "next-auth": "^5.0.0-beta.28",
+    "next-auth": "5.0.0-beta.28",
     "next-qrcode": "^2.5.1",
-    "prisma": "^6.9.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-hook-form": "^7.57.0",
+    "prisma": "^6.10.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.58.1",
     "react-hot-toast": "^2.5.2",
     "react-spinners": "^0.17.0",
-    "sass": "^1.89.1",
-    "zod": "^3.25.56"
+    "sass": "^1.89.2",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/csv-parse": "^1.2.5",
+    "@types/node": "^20.19.1",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "eslint": "^9.29.0",
     "eslint-config-next": "15.3.3",
-    "typescript": "^5"
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
   }
 }

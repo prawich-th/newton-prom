@@ -13,6 +13,24 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   jwt: {
     maxAge: 60 * 60 * 24 * 30,
   },
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+      }
+      return token;
+    },
+    session: async ({ session, token }) => {
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.email = token.email as string;
+        session.user.name = token.name as string;
+      }
+      return session;
+    },
+  },
   ...authConfig,
   providers: [
     Credentials({
